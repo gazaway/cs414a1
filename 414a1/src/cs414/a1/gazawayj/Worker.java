@@ -22,6 +22,10 @@ public class Worker {
 		qualifications = new HashSet<Qualification>();
 	}
 	
+	public Set<Qualification> getQuals(){
+		return qualifications;
+	}
+	
 	//Returns true when a worker is overloaded, false otherwise. A constraint for the entire system is that no worker
 	//should be overloaded. To determine overloading, consider all the active projects the worker is involved in. If
 	//  1*number_of_big_projects + 2*number_of_medium projects is greater than 4, then the worker is overloaded.

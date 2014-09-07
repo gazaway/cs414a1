@@ -28,6 +28,20 @@ public class Project {
 		status = ProjectStatus.planned;
 	}
 	
+	public boolean areQualsOkay(){
+		Set<Qualification> temp = new HashSet<Qualification>();
+		for(Worker i : members){
+			for (Qualification j : i.getQuals()){
+				temp.add(j);
+			}
+		}
+		return temp.containsAll(requirements);
+	}
+	
+	public void setStatus(ProjectStatus ps){
+		status = ps;
+	}
+	
 	//Sets the ProjectStatus to finished. Removes the project from each worker's project list. Removes each worker from the project worker list.
 	public void finishProject(){
 		status = ProjectStatus.finished;

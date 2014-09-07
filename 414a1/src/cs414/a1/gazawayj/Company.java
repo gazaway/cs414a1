@@ -44,7 +44,12 @@ public class Company {
 	//A planned or suspended project may be started as long as the project's qualification requirements are all satisfied. This project
 	//is now in active status. Otherwise, the project remains planned or suspended (i.e., as it was before the method was called).
 	public void start( Project p){
-		
+		if (p.getStatus() == ProjectStatus.suspended || p.getStatus() == ProjectStatus.planned){
+			//returns true if quals are fulfilled, else false
+			if (p.areQualsOkay()){
+				p.setStatus(ProjectStatus.active);
+			}
+		}	
 	}
 	
 	//An active project is marked finished. The project no longer has any workers as members. A suspended or planned project remains as it was.
