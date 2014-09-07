@@ -13,6 +13,7 @@ public class Company {
 		workers = new HashSet<Worker>();
 		projects = new HashSet<Project>();
 	}
+	//
 	
 	public Company(){
 		name = "";
