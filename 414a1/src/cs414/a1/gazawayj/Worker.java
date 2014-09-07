@@ -22,7 +22,7 @@ public class Worker {
 		projects = new HashSet<Project>();
 		qualifications = new HashSet<Qualification>();
 	}
-	
+
 	public Set<Qualification> getQuals(){
 		return qualifications;
 	}
@@ -54,6 +54,10 @@ public class Worker {
 	
 	public void removeFromProject(Project proj){
 		projects.remove(proj);
+	}
+	
+	public Set<Project> getProjects(){
+		return projects;
 	}
 	
 	public String toString(){

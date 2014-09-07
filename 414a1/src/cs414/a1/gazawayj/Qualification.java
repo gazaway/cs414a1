@@ -23,4 +23,8 @@ public class Qualification {
 	public String toString(){
 		return description;
 	}
+
+	public void removeWorker(Worker w) {
+		workers.remove(w);
+	}
 }

@@ -38,7 +38,7 @@ public class Company {
 						i.addWorker(w);
 						w.addProject(i);
 						//sets proj to active if all quals are fulfilled
-						i.areQualsOkay();
+						i.testQuals();
 					}
 				}
 			}
@@ -49,15 +49,26 @@ public class Company {
 	//then delete the worker from that project. If the qualification requirements of that project are no longer met, that project is 
 	//marked suspended. The worker is also removed from the list of workers for each of the qualifications this worker had.
 	public void fire( Worker w){
-		//TODO
-		workers.remove(w);
+		if (!employees.contains(w)){
+			employees.remove(w);
+			workers.remove(w);
+			for (Project i : w.getProjects()){
+				i.removeMember(w);
+				if (!i.testQuals()){
+					i.setStatus(ProjectStatus.suspended);
+				}
+			}
+			for (Qualification i : w.getQuals()){
+				i.removeWorker(w);
+			}
+		}
 	}
 
 	//A planned or suspended project may be started as long as the project's qualification requirements are all satisfied. This project
 	//is now in active status. Otherwise, the project remains planned or suspended (i.e., as it was before the method was called).
 	public void start( Project p){
 		//this method already does this (with a bit of added bloat)
-		p.areQualsOkay();
+		p.testQuals();
 	}
 
 	//An active project is marked finished. The project no longer has any workers as members. A suspended or planned project remains as it was.

@@ -32,7 +32,8 @@ public class Project {
 		
 	}
 	
-	public boolean areQualsOkay(){
+	//This method will test if the quals are fulfilled and set to active if it is
+	public boolean testQuals(){
 		Set<Qualification> temp = new HashSet<Qualification>();
 		for(Worker i : members){
 			for (Qualification j : i.getQuals()){
@@ -40,7 +41,7 @@ public class Project {
 			}
 		}
 		//if all requirements are fulfilled set proj to active
-		if (temp.containsAll(requirements)){
+		if (temp.containsAll(requirements) && members.size() > 0){
 			setStatus(ProjectStatus.active);
 		}
 		return temp.containsAll(requirements);
@@ -58,6 +59,10 @@ public class Project {
 			temp[i].removeFromProject(this);
 		}
 		members.clear();
+	}
+	
+	public void removeMember(Worker w){
+		members.remove(w);
 	}
 	
 	
