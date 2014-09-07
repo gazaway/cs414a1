@@ -7,18 +7,20 @@ public class Company {
 	private String name;
 	private Set<Worker> workers;
 	private Set<Project> projects;
+	private Set<Worker> employees;
 	
 	public Company(String name_){
 		name = name_;
 		workers = new HashSet<Worker>();
 		projects = new HashSet<Project>();
+		employees = new HashSet<Worker>();
 	}
-	//
 	
 	public Company(){
 		name = "";
 		workers = new HashSet<Worker>();
 		projects = new HashSet<Project>();
+		employees = new HashSet<Worker>();
 	}
 	//
 	
@@ -47,14 +49,18 @@ public class Company {
 	
 	//An active project is marked finished. The project no longer has any workers as members. A suspended or planned project remains as it was.
 	public void finish( Project p){
-		
+		if (p.getStatus() != ProjectStatus.suspended && p.getStatus() != ProjectStatus.planned){
+			p.finishProject();
+		}
 	}
 	
 	//Creates a new worker with the given nn as nickname, and the set of qualifications. This worker is added to the list of workers. For each
 	//qualification in the set qs, this method makes sure that the worker is added to the list of workers matching that qualification.
 	public Worker createWorker( String nn, Set<Qualification> qs){
-		//TODO
-		return new Worker(nn, qs, this);
+		//TODO add worker to quals in qs.
+		Worker temp = new Worker(nn, qs, this);
+		workers.add(temp);
+		return temp;
 	}
 	
 	//A new project is created and is entered in the list of projects carried out by the company. For each worker in ws, add the worker to the

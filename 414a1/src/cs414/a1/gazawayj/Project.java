@@ -26,7 +26,16 @@ public class Project {
 		// on construction. Also need to make sure all
 		// associations are accounted for (Worker, Qualifications, etc)
 		status = ProjectStatus.planned;
-		
+	}
+	
+	//Sets the ProjectStatus to finished. Removes the project from each worker's project list. Removes each worker from the project worker list.
+	public void finishProject(){
+		status = ProjectStatus.finished;
+		Worker[] temp = members.toArray(new Worker[members.size()]);
+		for (int i = 0; i < members.size(); i++){
+			temp[i].removeFromProject(this);
+		}
+		members.clear();
 	}
 	
 	
@@ -59,6 +68,10 @@ public class Project {
 	
 	public Company getCompany() {
 		return company;
+	}
+	
+	public ProjectStatus getStatus(){
+		return status;
 	}
 
 

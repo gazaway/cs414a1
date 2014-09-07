@@ -29,6 +29,10 @@ public class Worker {
 		return false;
 	}
 	
+	public void removeFromProject(Project proj){
+		projects.remove(proj);
+	}
+	
 	public String toString(){
 		return nickName + " : " + projects.size() + " : " + qualifications.size() + " : " + salary;
 	}
