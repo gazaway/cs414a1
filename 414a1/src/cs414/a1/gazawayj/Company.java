@@ -33,7 +33,7 @@ public class Company {
 			for (Project i : projects){
 				if (((i.getStatus() == ProjectStatus.planned) || (i.getStatus() == ProjectStatus.suspended)) && (i.getProjSize() == ProjectSize.small)){
 					//checks to see if the worker would be helpful to the project and isn't overloaded
-					if ((i.isHelpful(w)) && !(w.isOverLoaded()) && (w.canHandle(i))){
+					if ((i.isHelpful(w)) && (w.canHandle(i))){
 						//add worker to project and project to worker
 						i.addWorker(w);
 						w.addProject(i);
@@ -49,10 +49,9 @@ public class Company {
 	//then delete the worker from that project. If the qualification requirements of that project are no longer met, that project is 
 	//marked suspended. The worker is also removed from the list of workers for each of the qualifications this worker had.
 	public void fire( Worker w){
-		if (!employees.contains(w)){
-			employees.remove(w);
-			workers.remove(w);
+		if (employees.contains(w)){
 			for (Project i : w.getProjects()){
+				System.out.println("*MADE IT");
 				i.removeMember(w);
 				if (!i.testQuals()){
 					i.setStatus(ProjectStatus.suspended);
@@ -61,6 +60,8 @@ public class Company {
 			for (Qualification i : w.getQuals()){
 				i.removeWorker(w);
 			}
+			employees.remove(w);
+			workers.remove(w);
 		}
 	}
 
@@ -92,7 +93,9 @@ public class Company {
 	//The project is marked as planned. The name and size of the project are also set. Only employees can be members of a project.
 	public Project createProject( String n, Set<Worker> ws, Set<Qualification> qs, ProjectSize s){
 		//TODO
-		return new Project(n, ws, qs, s, this);
+		Project proj =  new Project(n, ws, qs, s, this);
+		projects.add(proj);
+		return proj;
 	}
 
 	public String getName(){
@@ -109,5 +112,35 @@ public class Company {
 
 	public String toString(){
 		return name + " : " + workers.size() + " : " + projects.size();
+	}
+	
+	public static void main(String[] args) {
+		Company comp = new Company("Jim");
+		Qualification one = new Qualification("Manager");
+		Set<Qualification> qual = new HashSet<Qualification>();
+		qual.add(one);
+		Worker tim = comp.createWorker("Jim", qual);
+		Set<Worker> workers = new HashSet<Worker>();
+		workers.add(tim);
+		Project jims = comp.createProject("Jim's Project", workers, qual, ProjectSize.large);
+		Worker bob = comp.createWorker("Bob", qual);
+		jims.addWorker(bob);
+		comp.hire(bob);
+		jims.setStatus(ProjectStatus.active);
+		Project another = comp.createProject("Bob's Project", workers, qual, ProjectSize.small);
+		for (Project i : comp.getProjects()){
+			System.out.println(i.toString());
+			for (Worker j : i.getWorkers()){
+				System.out.println('\t'+j.toString());
+			}
+		}
+		System.out.println("_______________________________");
+		comp.fire(bob);
+		for (Project i : comp.getProjects()){
+			System.out.println(i.toString());
+			for (Worker j : i.getWorkers()){
+				System.out.println('\t'+j.toString());
+			}
+		}
 	}
 }
