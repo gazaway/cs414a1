@@ -29,7 +29,7 @@ public class Project {
 		// associations are accounted for (Worker, Qualifications, etc)
 		status = ProjectStatus.planned;
 		missingReqs = new HashSet<Qualification>();
-		//TODO make function to test reqs
+		//TODO make function to test reqs 
 	}
 	
 	//This method will test if the quals are fulfilled and set to active if it is
