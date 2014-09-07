@@ -22,7 +22,7 @@ public class Project {
 		if (members == null) {
 			members = new HashSet<Worker>();
 		}
-		requirements = quals;//
+		requirements = quals;
 		size = sz;
 		// TODO double check on this part, if project status should be 'planned'
 		// on construction. Also need to make sure all
