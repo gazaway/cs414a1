@@ -27,10 +27,7 @@ public class Worker {
 		return qualifications;
 	}
 	
-	//Returns true when a worker is overloaded, false otherwise. A constraint for the entire system is that no worker
-	//should be overloaded. To determine overloading, consider all the active projects the worker is involved in. If
-	//  1*number_of_big_projects + 2*number_of_medium projects is greater than 4, then the worker is overloaded.
-	public boolean isOverLoaded(){
+	private int[] checkLoad(){
 		int big = 0;
 		int mid = 0;
 		for (Project i : projects){
@@ -41,6 +38,17 @@ public class Worker {
 				mid++;
 			}
 		}
+		int[] temp = {big, mid};
+		return temp;
+	}
+	
+	//Returns true when a worker is overloaded, false otherwise. A constraint for the entire system is that no worker
+	//should be overloaded. To determine overloading, consider all the active projects the worker is involved in. If
+	//  1*number_of_big_projects + 2*number_of_medium projects is greater than 4, then the worker is overloaded.
+	public boolean isOverLoaded(){
+		int[] temp = checkLoad();
+		int big = temp[0];
+		int mid = temp[1];
 		return ((1*big + 2*mid) > OVERLOADED_HOURS);
 	}
 	
@@ -53,21 +61,14 @@ public class Worker {
 	}
 
 	public boolean canHandle(Project p) {
-		int big = 0;
-		int mid = 0;
-		for (Project i : projects) {
-			if ((i.getProjSize() == ProjectSize.large) && (i.getStatus() == ProjectStatus.active)) {
-				big++;
-			} else if ((i.getProjSize() == ProjectSize.medium) && (i.getStatus() == ProjectStatus.active)) {
-				mid++;
-			}
-		}
+		int[] temp = checkLoad();
 		if (p.getProjSize() == ProjectSize.large){
-			big++;
-		} else if (p.getProjSize() == ProjectSize.medium){
-			mid++;
+			temp[0]++;
+		} 
+		else if (p.getProjSize() == ProjectSize.medium){
+			temp[1]++;
 		}
-		return ((1*big + 2*mid) < OVERLOADED_HOURS);
+		return ((1*temp[0] + 2*temp[1]) < OVERLOADED_HOURS);
 	}
 
 	public void addProject(Project p) {
