@@ -10,6 +10,7 @@ public class Worker {
 	private Company employer;
 	private Set<Project> projects;
 	private Set<Qualification> qualifications;
+	private final int OVERLOADED_HOURS = 4;
 	
 	//Constructor override .. String nn, Set<Qualification> qs
 	public Worker(String nn, Set<Qualification> qs, Company empl){
@@ -30,7 +31,17 @@ public class Worker {
 	//should be overloaded. To determine overloading, consider all the active projects the worker is involved in. If
 	//  1*number_of_big_projects + 2*number_of_medium projects is greater than 4, then the worker is overloaded.
 	public boolean isOverLoaded(){
-		return false;
+		int big = 0;
+		int mid = 0;
+		for (Project i : projects){
+			if ((i.getProjSize() == ProjectSize.large) && (i.getStatus() == ProjectStatus.active)){
+				big++;
+			}
+			else if ((i.getProjSize() == ProjectSize.medium) && (i.getStatus() == ProjectStatus.active)){
+				mid++;
+			}
+		}
+		return ((1*big + 2*mid) > OVERLOADED_HOURS);
 	}
 	
 	public void removeFromProject(Project proj){
@@ -39,5 +50,28 @@ public class Worker {
 	
 	public String toString(){
 		return nickName + " : " + projects.size() + " : " + qualifications.size() + " : " + salary;
+	}
+
+	public boolean canHandle(Project p) {
+		int big = 0;
+		int mid = 0;
+		for (Project i : projects) {
+			if ((i.getProjSize() == ProjectSize.large) && (i.getStatus() == ProjectStatus.active)) {
+				big++;
+			} else if ((i.getProjSize() == ProjectSize.medium) && (i.getStatus() == ProjectStatus.active)) {
+				mid++;
+			}
+		}
+		if (p.getProjSize() == ProjectSize.large){
+			big++;
+		} else if (p.getProjSize() == ProjectSize.medium){
+			mid++;
+		}
+		return ((1*big + 2*mid) < OVERLOADED_HOURS);
+	}
+
+	public void addProject(Project p) {
+		//TODO make sure there are no duplicates
+		projects.add(p);
 	}
 }

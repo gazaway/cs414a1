@@ -11,6 +11,8 @@ public class Project {
 	private ProjectStatus status;
 	private Set<Worker> members;
 	private Set<Qualification> requirements;
+	//TODO
+	private Set<Qualification> missingReqs;
 	
 	//Constructor Overload ..  String n, Set<Worker> ws, Set<Qualification> qs, ProjectSize s
 	public Project(String nm, Set<Worker> wrkrs, Set<Qualification> quals, ProjectSize sz, Company comp){
@@ -26,6 +28,8 @@ public class Project {
 		// on construction. Also need to make sure all
 		// associations are accounted for (Worker, Qualifications, etc)
 		status = ProjectStatus.planned;
+		missingReqs = new HashSet<Qualification>();
+		
 	}
 	
 	public boolean areQualsOkay(){
@@ -34,6 +38,10 @@ public class Project {
 			for (Qualification j : i.getQuals()){
 				temp.add(j);
 			}
+		}
+		//if all requirements are fulfilled set proj to active
+		if (temp.containsAll(requirements)){
+			setStatus(ProjectStatus.active);
 		}
 		return temp.containsAll(requirements);
 	}
@@ -96,6 +104,11 @@ public class Project {
 
 	public String toString(){
 		return name + " : " + members.size() + " : " + status;
+	}
+
+	public void addWorker(Worker w) {
+		//TODO make sure there are no duplicates
+		members.add(w);
 	}
 	
 }

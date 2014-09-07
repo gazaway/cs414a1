@@ -29,8 +29,25 @@ public class Company {
 	//worker completely satisfies the remaining requirements, that project is marked active (i.e., the project is started). Otherwise,
 	//the project remains planned or suspended.
 	public void hire( Worker w){
+		if (!employees.contains(w)){
+			employees.add(w);
+			for (Project i : projects){
+				if (((i.getStatus() == ProjectStatus.planned) || (i.getStatus() == ProjectStatus.suspended)) && i.getProjSize() == ProjectSize.small){
+					//checks to see if the worker would be helpful to the project and isn't overloaded
+					if (i.isHelpful(w) && !w.isOverLoaded()){
+						//check to see if the project WOULD overload the worker
+						if (w.canHandle(i)) {
+							//add worker to project and project to worker
+							i.addWorker(w);
+							w.addProject(i);
+							i.areQualsOkay();
+						}
+					}
+				}
+			}
+		}
 		//TODO
-		workers.add(w);
+		
 	}
 	
 	//Only employees can be fired. Remove the worker from the workers role of the company. If the worker was a member of any project, 
