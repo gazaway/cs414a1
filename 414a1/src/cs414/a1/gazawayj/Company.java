@@ -114,6 +114,7 @@ public class Company {
 		return name + " : " + workers.size() + " : " + projects.size();
 	}
 	
+	/*   Getting rid of main
 	public static void main(String[] args) {
 		Company comp = new Company("Jim");
 		Qualification one = new Qualification("Manager");
@@ -142,5 +143,5 @@ public class Company {
 				System.out.println('\t'+j.toString());
 			}
 		}
-	}
+	}*/
 }
