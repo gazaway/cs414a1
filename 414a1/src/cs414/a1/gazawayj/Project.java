@@ -27,6 +27,9 @@ public class Project {
 		// on construction. Also need to make sure all
 		// associations are accounted for (Worker, Qualifications, etc)
 		status = ProjectStatus.planned;
+		for (Worker i : members){
+			i.addProject(this);
+		}
 		missingQualifications();
 	}
 	
@@ -60,7 +63,7 @@ public class Project {
 	}
 	
 	public void removeMember(Worker w){
-		System.out.println(members.remove(w));
+		members.remove(w);
 	}
 	
 	
@@ -124,8 +127,8 @@ public class Project {
 	}
 
 	public void addWorker(Worker w) {
-		//TODO make sure there are no duplicates
 		members.add(w);
+		w.addProject(this);
 	}
 	
 }

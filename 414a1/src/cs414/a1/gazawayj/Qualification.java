@@ -20,6 +20,10 @@ public class Qualification {
 		return workers;
 	}
 	
+	public void addWorker(Worker w){
+		workers.add(w);
+	}
+	
 	public String getDesc(){
 		return description;
 	}

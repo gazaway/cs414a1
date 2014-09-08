@@ -51,7 +51,6 @@ public class Company {
 	public void fire( Worker w){
 		if (employees.contains(w)){
 			for (Project i : w.getProjects()){
-				System.out.println("*MADE IT");
 				i.removeMember(w);
 				if (!i.testQuals()){
 					i.setStatus(ProjectStatus.suspended);
@@ -82,9 +81,12 @@ public class Company {
 	//Creates a new worker with the given nn as nickname, and the set of qualifications. This worker is added to the list of workers. For each
 	//qualification in the set qs, this method makes sure that the worker is added to the list of workers matching that qualification.
 	public Worker createWorker( String nn, Set<Qualification> qs){
-		//TODO add worker to quals in qs.
 		Worker temp = new Worker(nn, qs, this);
 		workers.add(temp);
+		//add worker to each qualification
+		for (Qualification i : qs){
+			i.addWorker(temp);
+		}
 		return temp;
 	}
 
@@ -92,7 +94,6 @@ public class Company {
 	//members list of the project. For each qualification in qs, add the qualification in the qualification requirements list of the project. 
 	//The project is marked as planned. The name and size of the project are also set. Only employees can be members of a project.
 	public Project createProject( String n, Set<Worker> ws, Set<Qualification> qs, ProjectSize s){
-		//TODO
 		Project proj =  new Project(n, ws, qs, s, this);
 		projects.add(proj);
 		return proj;
@@ -114,18 +115,20 @@ public class Company {
 		return name + " : " + workers.size() + " : " + projects.size();
 	}
 	
-	/*   Getting rid of main
+	//   Getting rid of main
 	public static void main(String[] args) {
 		Company comp = new Company("Jim");
 		Qualification one = new Qualification("Manager");
 		Set<Qualification> qual = new HashSet<Qualification>();
 		qual.add(one);
-		Worker tim = comp.createWorker("Jim", qual);
+		Worker jan = comp.createWorker("Jan", qual);
+		Worker tim = comp.createWorker("Tim", qual);
 		Set<Worker> workers = new HashSet<Worker>();
 		workers.add(tim);
 		Project jims = comp.createProject("Jim's Project", workers, qual, ProjectSize.large);
 		Worker bob = comp.createWorker("Bob", qual);
 		jims.addWorker(bob);
+		jims.addWorker(tim);
 		comp.hire(bob);
 		jims.setStatus(ProjectStatus.active);
 		Project another = comp.createProject("Bob's Project", workers, qual, ProjectSize.small);
@@ -137,11 +140,13 @@ public class Company {
 		}
 		System.out.println("_______________________________");
 		comp.fire(bob);
+		comp.hire(jan);
+		another.addWorker(jan);
 		for (Project i : comp.getProjects()){
 			System.out.println(i.toString());
 			for (Worker j : i.getWorkers()){
 				System.out.println('\t'+j.toString());
 			}
 		}
-	}*/
+	}
 }
