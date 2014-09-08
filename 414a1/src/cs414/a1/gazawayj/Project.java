@@ -11,7 +11,6 @@ public class Project {
 	private ProjectStatus status;
 	private Set<Worker> members;
 	private Set<Qualification> requirements;
-	//TODO
 	private Set<Qualification> missingReqs;
 	
 	//Constructor Overload ..  String n, Set<Worker> ws, Set<Qualification> qs, ProjectSize s
@@ -28,8 +27,7 @@ public class Project {
 		// on construction. Also need to make sure all
 		// associations are accounted for (Worker, Qualifications, etc)
 		status = ProjectStatus.planned;
-		missingReqs = new HashSet<Qualification>();
-		//TODO make function to test reqs 
+		missingQualifications();
 	}
 	
 	//This method will test if the quals are fulfilled and set to active if it is
@@ -69,12 +67,26 @@ public class Project {
 	//Compare the qualifications required by the project and those that are met by the workers who are members of the project. Return
 	//the qualifications that are not met. An empty set (not null set) is returned when all the qualification requirements are met.
 	public Set<Qualification> missingQualifications(){
-		return null;
+		missingReqs = requirements;
+		for (Worker i : members){
+			for (Qualification j : i.getQuals()){
+				if (requirements.contains(j)){
+					missingReqs.remove(j);
+				}
+			}
+		}
+		return missingReqs;
 	}
 	
 	//If at least one of the missing qualification requirements of a project is satisfied by the worker, then return true, else return false.
 	public boolean isHelpful( Worker w){
-		return false;
+		boolean temp = false;
+		for (Qualification i : missingReqs){
+			if (w.getQuals().contains(i)){
+				temp = true;
+			}
+		}
+		return temp;
 	}
 	
 	public Set<Worker> getWorkers(){

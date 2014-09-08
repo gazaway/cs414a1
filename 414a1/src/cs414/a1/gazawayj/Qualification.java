@@ -20,6 +20,10 @@ public class Qualification {
 		return workers;
 	}
 	
+	public String getDesc(){
+		return description;
+	}
+	
 	public String toString(){
 		return description;
 	}
