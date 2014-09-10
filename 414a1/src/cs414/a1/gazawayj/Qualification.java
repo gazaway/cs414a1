@@ -12,6 +12,9 @@ public class Qualification {
 	
 	public Qualification(String desc){
 		description = desc;
+		if (desc == null){
+			description = "";
+		}
 		projects = new HashSet<Project>();
 		workers = new HashSet<Worker>();
 	}

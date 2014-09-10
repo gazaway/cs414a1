@@ -22,6 +22,9 @@ public class Project {
 			members = new HashSet<Worker>();
 		}
 		requirements = quals;
+		if (quals == null){
+			requirements = new HashSet<Qualification>();
+		}
 		size = sz;
 		// TODO double check on this part, if project status should be 'planned'
 		// on construction. Also need to make sure all

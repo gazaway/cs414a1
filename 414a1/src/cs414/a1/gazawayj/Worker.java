@@ -16,8 +16,10 @@ public class Worker {
 	public Worker(String nn, Set<Qualification> qs, Company empl){
 		nickName = nn;
 		qualifications = qs;
+		if (qs == null){
+			qualifications = new HashSet<Qualification>();
+		}
 		employer = empl;
-		//TODO double check on this part to make sure salary should, in fact, be $0 on worker construction
 		salary = 0;
 		projects = new HashSet<Project>();
 		qualifications = new HashSet<Qualification>();
