@@ -67,6 +67,7 @@ public class Project {
 	
 	public void removeMember(Worker w){
 		members.remove(w);
+		testQuals();
 	}
 	
 	
@@ -132,6 +133,7 @@ public class Project {
 	public void addWorker(Worker w) {
 		members.add(w);
 		w.addProject(this);
+		testQuals();
 	}
 	
 	public boolean equals(Object obj){
