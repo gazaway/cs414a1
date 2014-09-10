@@ -9,6 +9,7 @@ public class Qualification {
 	private Set<Worker> workers;
 	
 	public Qualification(String desc){
+		//TODO make sure there are no dups
 		description = desc;
 		if (desc == null){
 			description = "";

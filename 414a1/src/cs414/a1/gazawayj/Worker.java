@@ -13,6 +13,7 @@ public class Worker {
 	
 	//Constructor override .. String nn, Set<Qualification> qs
 	public Worker(String nn, Set<Qualification> qs, Company empl){
+		//TODO make sure there are no dups.
 		nickName = nn;
 		qualifications = qs;
 		if (qs == null){
@@ -77,7 +78,6 @@ public class Worker {
 	}
 
 	public void addProject(Project p) {
-		//TODO make sure there are no duplicates
 		projects.add(p);
 	}
 	

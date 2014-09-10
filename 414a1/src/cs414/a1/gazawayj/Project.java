@@ -14,6 +14,7 @@ public class Project {
 	
 	//Constructor Overload ..  String n, Set<Worker> ws, Set<Qualification> qs, ProjectSize s
 	public Project(String nm, Set<Worker> wrkrs, Set<Qualification> quals, ProjectSize sz, Company comp){
+		//TODO make sure that there are no dups.
 		name = nm;
 		members = wrkrs;
 		setCompany(comp);
