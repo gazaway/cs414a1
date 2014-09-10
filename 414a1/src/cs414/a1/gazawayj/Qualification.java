@@ -35,4 +35,8 @@ public class Qualification {
 	public void removeWorker(Worker w) {
 		workers.remove(w);
 	}
+	
+	public boolean equals(Object obj){
+		return ((((Qualification)obj).description == this.description) && (obj instanceof Qualification));
+	}
 }

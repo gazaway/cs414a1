@@ -115,6 +115,11 @@ public class Company {
 		return name + " : " + workers.size() + " : " + projects.size();
 	}
 	
+	public boolean equals(Object obj){
+		return ((((Company)obj).name == this.name) && (obj instanceof Company));
+	}
+	
+	
 	//   Getting rid of main
 	public static void main(String[] args) {
 		Company comp = new Company("Jim");

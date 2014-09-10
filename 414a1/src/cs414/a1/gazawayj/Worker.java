@@ -79,4 +79,8 @@ public class Worker {
 		//TODO make sure there are no duplicates
 		projects.add(p);
 	}
+	
+	public boolean equals(Object obj){
+		return ((((Worker)obj).nickName == this.nickName) && (obj instanceof Worker));
+	}
 }

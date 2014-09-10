@@ -131,5 +131,8 @@ public class Project {
 		w.addProject(this);
 	}
 	
+	public boolean equals(Object obj){
+		return ((((Project)obj).name == this.name) && (obj instanceof Project));
+	}
 }
 
