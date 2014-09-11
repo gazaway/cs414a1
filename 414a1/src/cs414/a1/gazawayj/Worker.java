@@ -13,7 +13,6 @@ public class Worker {
 	
 	//Constructor override .. String nn, Set<Qualification> qs
 	public Worker(String nn, Set<Qualification> qs, Company empl){
-		//TODO make sure there are no dups.
 		nickName = nn;
 		qualifications = qs;
 		if (qs == null){
@@ -24,6 +23,17 @@ public class Worker {
 		projects = new HashSet<Project>();
 		qualifications = new HashSet<Qualification>();
 	}
+	
+	//Constructor override .. String nn, Set<Qualification> qs
+	public Worker(String nn, Set<Qualification> qs){
+		nickName = nn;
+		qualifications = qs;
+		if (qs == null){
+			qualifications = new HashSet<Qualification>();
+		}
+		salary = 0;
+		projects = new HashSet<Project>();
+	}
 
 	public Set<Qualification> getQuals(){
 		return qualifications;
@@ -32,7 +42,7 @@ public class Worker {
 	private int[] checkLoad(){
 		int big = 0;
 		int mid = 0;
-		for (Project i : projects){
+		for (Project i : this.getProjects()){
 			if ((i.getProjSize() == ProjectSize.large) && (i.getStatus() == ProjectStatus.active)){
 				big++;
 			}

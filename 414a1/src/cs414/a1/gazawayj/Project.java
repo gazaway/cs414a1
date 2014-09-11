@@ -21,6 +21,9 @@ public class Project {
 		if (members == null) {
 			members = new HashSet<Worker>();
 		}
+		for (Worker i : members){
+			i.addProject(this);
+		}
 		requirements = quals;
 		if (quals == null){
 			requirements = new HashSet<Qualification>();
