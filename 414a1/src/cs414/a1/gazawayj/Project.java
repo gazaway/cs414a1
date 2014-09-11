@@ -78,6 +78,9 @@ public class Project {
 	//the qualifications that are not met. An empty set (not null set) is returned when all the qualification requirements are met.
 	public Set<Qualification> missingQualifications(){
 		missingReqs = requirements;
+		if (requirements == null){
+			missingReqs = new HashSet<Qualification>();
+		}
 		for (Worker i : members){
 			for (Qualification j : i.getQuals()){
 				if (requirements.contains(j)){
@@ -141,6 +144,12 @@ public class Project {
 	
 	public boolean equals(Object obj){
 		return ((((Project)obj).name == this.name) && (obj instanceof Project));
+	}
+	
+	public int hashCode() {
+		int hash = 3;
+		hash = 7 * hash + this.name.hashCode();
+		return hash;
 	}
 }
 

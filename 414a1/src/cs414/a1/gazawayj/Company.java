@@ -118,4 +118,10 @@ public class Company {
 	public boolean equals(Object obj){
 		return ((((Company)obj).name == this.name) && (obj instanceof Company));
 	}
+	
+	public int hashCode() {
+		int hash = 3;
+		hash = 7 * hash + this.name.hashCode();
+		return hash;
+	}
 }

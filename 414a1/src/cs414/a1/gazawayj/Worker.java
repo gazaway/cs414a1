@@ -94,4 +94,10 @@ public class Worker {
 	public boolean equals(Object obj){
 		return ((((Worker)obj).nickName == this.nickName) && (obj instanceof Worker));
 	}
+	
+	public int hashCode() {
+		int hash = 3;
+		hash = 7 * hash + this.nickName.hashCode();
+		return hash;
+	}
 }

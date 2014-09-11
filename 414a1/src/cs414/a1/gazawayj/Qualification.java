@@ -33,6 +33,12 @@ public class Qualification {
 	public String toString(){
 		return description;
 	}
+	
+	public int hashCode() {
+		int hash = 3;
+		hash = 7 * hash + this.description.hashCode();
+		return hash;
+	}
 
 	public void removeWorker(Worker w) {
 		workers.remove(w);
