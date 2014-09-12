@@ -1,0 +1,77 @@
+Jimmy Gazaway
+gazawayj
+9/11/14
+
+cs 414 assignment 1
+
+I struggled a bit with this assignment. Unfortunately, I've done no 
+Junit work before and some of it seemed horribly wonky to me. I tried
+to complete what tests I could, but generally if I did much other than
+what I have submitted in this zip, I'd get null pointer exceptions or
+errors like that.
+
+All you should have to do is run the Junit test on the TestAll.java file.
+
+
+COMPANYTEST
+_________________
+
+testFinish() simply runs the Company.finish method and check the status
+  of the project.
+
+testStart() attempts to first assert that the project status of the
+  first project is suspended. It then hires a worker to the company that
+  should fulfill all requirements for the project and set the project 
+  status to active. **Unfortunately this is one of the tests that I kept
+  getting null pointer errors on.... It doesn't work..
+
+testHire() first attempts to hire a worker. It then asserts that the 
+  company shows as having an employee now using its toString() method. It
+  then asserts that the company's worker set contains only that worker.
+
+testString() simply asserts that the toString() method is working correctly.
+
+setupTestEnviroment() simply creates the enviroment necissary to run the
+  Junit tests. Not important.
+
+
+PROJECTTEST
+_________________
+
+testEquals() asserts that the equals method works first with bad input and
+  then good input.
+
+testHelp() just asserts that a worker that IS helpful to the project returns
+  true. It then asserts that a worker that is NOT helpful returns false.
+
+testMiss() creates a hashset of qualifications that should match what 
+  qualifications should be missing from proj1. It then asserts that the
+  missingQualifications() method returned a hashset that matched the one made.
+
+setupTestEnviroment() simply creates the enviroment necissary to run the
+  Junit tests. Not important.
+
+
+WORKERTEST
+_________________
+
+testOverload() asserts that a worker that is not overloaded reports as false
+  when Worker.isOverLoaded() is called. Does same for a worker that actually
+  IS overloaded.
+
+testEquals() asserts that the equals method works first with bad input and
+  then good input.
+
+testString() simply asserts that the toString() method is working correctly.
+
+setupTestEnviroment() simply creates the enviroment necissary to run the
+  Junit tests. Not important.
+
+
+QUALIFICATIONTEST
+_________________
+
+testEquals() asserts that the equals method works first with bad input and
+  then good input.
+
+testString() simply asserts that the toString() method is working correctly.

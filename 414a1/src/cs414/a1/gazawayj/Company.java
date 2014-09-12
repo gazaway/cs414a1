@@ -35,6 +35,7 @@ public class Company {
 					//checks to see if the worker would be helpful to the project and isn't overloaded
 					if ((i.isHelpful(w)) && (w.canHandle(i))){
 						//add worker to project and project to worker
+						System.out.println("Made it");
 						i.addWorker(w);
 						w.addProject(i);
 						//sets proj to active if all quals are fulfilled
@@ -42,6 +43,7 @@ public class Company {
 					}
 				}
 			}
+			workers.remove(w);
 		}
 	}
 
@@ -112,7 +114,7 @@ public class Company {
 	}
 
 	public String toString(){
-		return name + " : " + workers.size() + " : " + projects.size();
+		return name + " : " + employees.size() + " : " + projects.size();
 	}
 	
 	public boolean equals(Object obj){

@@ -20,6 +20,25 @@ public class WorkerTest {
 		testString(temp1);
 	}
 
+	public void testOverload(Worker temp1, Worker temp2){
+		//Assert that temp1 is overloaded & temp2 isn't
+		assertTrue(temp1.isOverLoaded());
+		assertFalse(temp2.isOverLoaded());
+	}
+
+	public void testEquals(Worker temp1, Worker temp2, Set<Qualification> set1){
+		//Make sure equals behaves as should with bad input
+		assertFalse(temp1.equals(temp2));
+		temp2 = new Worker("One", set1);
+		// Assert that equals works with correct input
+		assertTrue(temp1.equals(temp2));
+	}
+
+	public void testString(Worker temp1){
+		assertTrue(temp1.toString().equals("One : 4 : 1 : 0"));
+	}
+	
+
 	//Simply sets up the test enviroment
 	public void setupTestEnviroment() {
 		miss = new HashSet<Qualification>();
@@ -52,24 +71,6 @@ public class WorkerTest {
 		proj2.setStatus(ProjectStatus.active);
 		proj3.setStatus(ProjectStatus.active);
 		proj4.setStatus(ProjectStatus.active);
-	}
-
-	public void testOverload(Worker temp1, Worker temp2){
-		//Assert that temp1 is overloaded & temp2 isn't
-		assertTrue(temp1.isOverLoaded());
-		assertFalse(temp2.isOverLoaded());
-	}
-
-	public void testEquals(Worker temp1, Worker temp2, Set<Qualification> set1){
-		//Make sure equals behaves as should with bad input
-		assertFalse(temp1.equals(temp2));
-		temp2 = new Worker("One", set1);
-		// Assert that equals works with correct input
-		assertTrue(temp1.equals(temp2));
-	}
-
-	public void testString(Worker temp1){
-		assertTrue(temp1.toString().equals("One : 4 : 1 : 0"));
 	}
 
 	//Needed variables
